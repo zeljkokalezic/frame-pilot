@@ -8,13 +8,15 @@ class SlackPilotController < ApplicationController
     
     if @token == ''
       render text: ""
+      return
     end
     
     if @text == ''
       render text: "Please enter URL"
+      return
     end
     
-    render text: "<#{request.protocol}#{request.host_with_port}/slack_pilot/terminal?key=#{Base64.encode64(@text)}|Frame terminal>"
+    render text: "<#{request.protocol}#{request.host_with_port}/slack_pilot/terminal?key=#{Base64.encode64(@text)}|FrameTerminal>".split.join("")
     
   end
 
