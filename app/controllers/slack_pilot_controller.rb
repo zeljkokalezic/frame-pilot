@@ -1,4 +1,5 @@
 require 'base64'
+require 'net/http'
 
 class SlackPilotController < ApplicationController
   def embed
