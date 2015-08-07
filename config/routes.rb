@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'slack_pilot/embed'
+
+  get 'slack_pilot/terminal'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
