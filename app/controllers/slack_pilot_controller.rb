@@ -16,7 +16,19 @@ class SlackPilotController < ApplicationController
       return
     end
     
-    render text: "<#{request.protocol}#{request.host_with_port}/slack_pilot/terminal?key=#{Base64.encode64(@text)}|FrameTerminal>".split.join("")
+    terminal_location = "<#{request.protocol}#{request.host_with_port}/slack_pilot/terminal?key=#{Base64.encode64(@text)}|FrameTerminal>".split.join("")
+    render text: terminal_location
+    
+    uri = URI('https://hooks.slack.com/services/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')
+    
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri.path, {'Content-Type' =>'application/json'})
+    request.body = '{"username": "Fra.me", "text": "New ' + terminal_location + ' for ' + @text + '"}'
+    
+    response = http.request(request)
+
     
   end
 
